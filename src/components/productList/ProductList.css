@@ -1,0 +1,56 @@
+.heading{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: wavy;
+}
+.add-btn {
+    border: 1px solid green;
+    border-radius: 5px;
+    background-color: transparent;
+    outline: none;
+    padding: 8px 15px;
+    color: green;
+    cursor: pointer;
+    font-size: 10px;
+  }
+  .button-container {
+    border: 1px solid green;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  .quantity-btn {
+    background-color: transparent;
+    color: green;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  span {
+    color: green;
+    font-family: 'Courier New';
+    font-size: 12px;
+  }
+  .price-tag {
+    font-family: 'Courier New';
+    font-size: 12px;
+    color: black;
+  }
+  
+  .quantity-value-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .not-show-add-btn {
+    display: none;
+  }
