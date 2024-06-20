@@ -14,6 +14,8 @@ const apiStatusConstants = {
 const Product = () => {
   const [productsList, setProductList] = useState([]);
   const [apiStatus, setApisStatus] = useState(apiStatusConstants.initial);
+  const [activeCategory, setActiveCategory] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -60,9 +62,17 @@ const Product = () => {
 
   const renderSuccessView = () => (
     <>
-      <ProductList productsList={productsList} />
+      <ProductList
+        productsList={productsList}
+        activeCategory={activeCategory}
+      />
     </>
   );
+
+  const handleToChangeCategory = (id) => {
+    setActiveCategory(id);
+    setIsActive(true);
+  };
 
   const renderLoadingView = () => (
     <div class="flex flex-row gap-2">
@@ -99,7 +109,11 @@ const Product = () => {
   return (
     <div>
       <CarouselView />
-      <CategoryFilter productsList={productsList} />
+      <CategoryFilter
+        productsList={productsList}
+        handleToChangeCategory={handleToChangeCategory}
+        isActive={isActive}
+      />
       {renderProductList()}
     </div>
   );

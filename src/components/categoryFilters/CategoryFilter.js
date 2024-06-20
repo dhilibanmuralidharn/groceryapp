@@ -28,8 +28,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CategoryFilter({ productsList }) {
+export default function CategoryFilter({
+  productsList,
+  handleToChangeCategory,
+  isActive,
+}) {
   const [open, setOpen] = useState(false);
+
+  const clickToChangeCategory = (id) => {
+    handleToChangeCategory(id);
+  };
 
   return (
     <div className="bg-gray-50">
@@ -103,7 +111,14 @@ export default function CategoryFilter({ productsList }) {
                               >
                                 <button
                                   type="button"
-                                  className="ml-3 text-sm text-gray-500"
+                                  className={
+                                    isActive
+                                      ? "bg-gray-500 text-white"
+                                      : "ml-3 text-sm text-gray-500"
+                                  }
+                                  onClick={() =>
+                                    clickToChangeCategory(option.categoryName)
+                                  }
                                 >
                                   {option.categoryName}
                                 </button>
@@ -155,7 +170,7 @@ export default function CategoryFilter({ productsList }) {
                     {sortOptions.map((option) => (
                       <MenuItem key={option}>
                         {({ focus }) => (
-                          <a
+                          <button
                             href={option.href}
                             className={classNames(
                               focus ? "bg-gray-100" : "",
@@ -163,7 +178,7 @@ export default function CategoryFilter({ productsList }) {
                             )}
                           >
                             {option.name}
-                          </a>
+                          </button>
                         )}
                       </MenuItem>
                     ))}
@@ -189,7 +204,7 @@ export default function CategoryFilter({ productsList }) {
               >
                 <div>
                   <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                    <span>Category</span>
+                    <p>Category</p>
                     <ChevronDownIcon
                       className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
@@ -210,7 +225,11 @@ export default function CategoryFilter({ productsList }) {
                         <div key={option.value} className="flex items-center">
                           <button
                             type="button"
+                            id={option.categoryName}
                             className="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"
+                            onClick={() =>
+                              clickToChangeCategory(option.categoryName)
+                            }
                           >
                             {option.categoryName}
                           </button>

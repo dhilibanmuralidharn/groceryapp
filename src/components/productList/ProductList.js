@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./ProductList.css";
 
-export default function ProductList({ productsList }) {
+export default function ProductList({ productsList, activeCategory }) {
   const [quantities, setQuantities] = useState({});
-
+  const [filteredProducts, setFilteredProducts] = useState(productsList);
   useEffect(() => {
     const initialQuantities = {};
     productsList.forEach((category) => {
@@ -13,6 +13,17 @@ export default function ProductList({ productsList }) {
     });
     setQuantities(initialQuantities);
   }, [productsList]);
+
+  useEffect(() => {
+    if (activeCategory) {
+      const filtered = productsList.filter(
+        (category) => category.categoryName === activeCategory
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(productsList);
+    }
+  }, [activeCategory, productsList]);
 
   const handleAddToCart = (productId) => {
     setQuantities((prevQuantities) => ({
@@ -43,7 +54,7 @@ export default function ProductList({ productsList }) {
     <div className="bg-white mt-5">
       <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
         <h2 className="sr-only">Products</h2>
-        {productsList.map((category) => (
+        {filteredProducts.map((category) => (
           <div key={category.categoryName}>
             <h1 className="m-3 heading">{category.categoryName}</h1>
             <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
